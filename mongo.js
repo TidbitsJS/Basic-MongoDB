@@ -18,19 +18,32 @@ const playSchema = new mongoose.Schema({
 
 const Play = mongoose.model('Play', playSchema)
 
-async function playground () {
+async function playground() {
     const play = new Play ({
-        nickname: 'Tidbits',
-        hobby: 'Exploring',
-        job: 'Coding',
-        age: 10,
+        nickname: 'Tom',
+        hobby: 'Sleeping',
+        job: 'Running',
+        age: 7,
         bookie: false,
-        play: 'Black Love',
-        tags: ['Writer', 'Motivator', 'Passionate']
+        play: 'Tom and Jerry',
+        tags: ['Cartoon', 'Blue', 'Jerry']
     })
     
     const result = await play.save()
+    console.log('====================================');
     console.log(result)
+    console.log('====================================');
+}
+
+async function getPlays() {
+    const plays = await Play
+        .find({bookie: false})
+        .sort({nickname: 1})
+    
+    console.log('====================================');
+    console.log(plays);
+    console.log('====================================');
 }
 
 playground()
+getPlays()
