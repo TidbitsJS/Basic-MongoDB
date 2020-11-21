@@ -39,8 +39,19 @@ async function getFullstackCourses() {
     console.log('====================================');
 }
 
+async function getPaidCourses() {
+    const paidCourses = await Course
+        .find({ isPublished: true })
+        .or([{ price: {$gte: 15} }, {name: /.*By.*/i }])
+
+    console.log('====================================');
+    console.log(paidCourses);
+    console.log('====================================');
+}
+
 getBackendCourses()
 getFullstackCourses()
+getPaidCourses()
 
 /*
     const fullstachCourses = await Course
