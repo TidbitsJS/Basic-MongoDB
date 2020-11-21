@@ -20,13 +20,13 @@ const Play = mongoose.model('Play', playSchema)
 
 async function playground() {
     const play = new Play ({
-        nickname: 'Jasmine',
-        hobby: 'Exploring',
-        job: 'Testing applications',
-        age: 12,
-        bookie: true,
-        play: 'Jasmine Test',
-        tags: ['Jasmine', 'Test']
+        nickname: 'Riley',
+        hobby: 'Playing',
+        job: 'Studying',
+        age: 11,
+        bookie: false,
+        play: 'Inside Out',
+        tags: ['Joy', 'Sadness', 'Anger', 'Fear', 'Disgust']
     })
     
     const result = await play.save()
@@ -36,6 +36,7 @@ async function playground() {
 }
 
 async function getPlays() {
+
     const plays = await Play
         
         /* 
@@ -67,11 +68,25 @@ async function getPlays() {
             .find({ nickname: / .*A.* /i })
         */
 
+        /*
+          Count of documents
+           .count() 
+        */
 
-        .find({ nickname: /A$/i })
-        .limit(10)
+        /*
+          Pagination (/api/courses/pageNumber=2/...)
+            const pageNumber = 2
+            const pageSize = 10
+            
+            .skip((pageNumber - 1) * pageSize)
+            .limit(pageSize)
+
+        */
+
+        .find({ nickname: /.*A.*/i })
+        .limit(5)
         .sort({nickname: 1})
-        .select({nickname : 1, play: 1, age: 1, bookie: 1 })
+        .select({nickname : 1, play: 1})
     
     console.log('====================================');
     console.log(plays);
