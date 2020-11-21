@@ -20,13 +20,13 @@ const Play = mongoose.model('Play', playSchema)
 
 async function playground() {
     const play = new Play ({
-        nickname: 'Thorin',
-        hobby: 'Fighting',
-        job: 'Protecting the Gold',
-        age: 17,
-        bookie: false,
-        play: 'The Battle of Five Armies',
-        tags: ['Hobbit', 'Gold', 'Sword', 'Kill']
+        nickname: 'Jasmine',
+        hobby: 'Exploring',
+        job: 'Testing applications',
+        age: 12,
+        bookie: true,
+        play: 'Jasmine Test',
+        tags: ['Jasmine', 'Test']
     })
     
     const result = await play.save()
@@ -37,11 +37,38 @@ async function playground() {
 
 async function getPlays() {
     const plays = await Play
-        // .find({bookie: false})
-        // .find({ age: { $gte: 10, $lte: 20 }})
-        // .find({age: {$in: [5, 10, 15]}})
-        .find()
-        .or([{age: { $gte: 5, $lte: 20  }}, { bookie: false }])
+        
+        /* 
+          Normal Query 
+            .find({ bookie: false }) 
+        */
+
+        /* 
+          Comparison Query 
+            .find({ age: { $gte: 10, $lte: 20 } })
+            .find({ age: { $in: [5, 10, 15] } }) 
+        */
+        
+        /* 
+          Logical Query 
+            .find()
+            .or([{ age: { $gte: 5, $lte: 20  } }, { bookie: false }]) 
+        */
+
+        /*
+          Regular Expression Query
+           1] Starts with 'J'
+            .find({ nickname: /^J/ })
+
+           2] Ends with 'A' (Case insensitive)
+            .find({ nickname: /A$/i })
+        
+           3] Contains 'A' (Case insensitive)
+            .find({ nickname: / .*A.* /i })
+        */
+
+
+        .find({ nickname: /A$/i })
         .limit(10)
         .sort({nickname: 1})
         .select({nickname : 1, play: 1, age: 1, bookie: 1 })
