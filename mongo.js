@@ -20,13 +20,13 @@ const Play = mongoose.model('Play', playSchema)
 
 async function playground() {
     const play = new Play ({
-        nickname: 'Hobbit',
-        hobby: 'Living',
-        job: 'Doing an adventure',
-        age: 15,
-        bookie: true,
-        play: 'The Unexpected Journey',
-        tags: ['Small', 'Dwarves', 'Elevs']
+        nickname: 'Thorin',
+        hobby: 'Fighting',
+        job: 'Protecting the Gold',
+        age: 17,
+        bookie: false,
+        play: 'The Battle of Five Armies',
+        tags: ['Hobbit', 'Gold', 'Sword', 'Kill']
     })
     
     const result = await play.save()
@@ -39,9 +39,12 @@ async function getPlays() {
     const plays = await Play
         // .find({bookie: false})
         // .find({ age: { $gte: 10, $lte: 20 }})
-        .find({age: {$in: [5, 10, 15]}})
+        // .find({age: {$in: [5, 10, 15]}})
+        .find()
+        .or([{age: { $gte: 5, $lte: 20  }}, { bookie: false }])
+        .limit(10)
         .sort({nickname: 1})
-        .select({nickname : 1, play: 1 })
+        .select({nickname : 1, play: 1, age: 1, bookie: 1 })
     
     console.log('====================================');
     console.log(plays);
