@@ -21,4 +21,15 @@ to note for. Don't worry, I am not taking you back in time. My Point is to famil
  
 Now you have that slightest idea of SQL & NoSQL, let's deep dive to know further linking of NoSQL & MongoDB.
 
-`MongoDB` - 
+`MongoDB` - NoSQL database programs which uses JSON-like documents with optional schemas. 
+ Meaning that you can create records without first defining the structure, such as the fields or the types of their values.
+ 
+That will be a short description on what is MongoDB. You can always dig deeper. But for now, we will keep that deep theory aside and will jump on programming part.
+ 
+You can refer the mentioned doc on "How to setup mongoDB in your system". [Install MongoDB](https://docs.mongodb.com/manual/installation/).
+After successful installation, you will have MongoShell & Mongod. By default, MongoDB starts at port 27017. 
+We need this to connect Mongoose to our MongoDB service so that we can use database in our application.
+
+`Mongoose` is an Object Data Modeling (ODM) library for MongoDB and Node.js. It manages relationships between data, provides schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB. More clearly, it's a JavaScript framework that is commonly used in a Node.js application with a MongoDB database.
+
+
