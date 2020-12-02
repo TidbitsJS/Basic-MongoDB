@@ -32,4 +32,28 @@ We need this to connect Mongoose to our MongoDB service so that we can use datab
 
 `Mongoose` is an Object Data Modeling (ODM) library for MongoDB and Node.js. It manages relationships between data, provides schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB. More clearly, it's a JavaScript framework that is commonly used in a Node.js application with a MongoDB database.
 
+Assuming that you have all your required setup running on your machine, let's work on code.
+
+```javascript
+const mongoose = require('mongoose')
+
+mongoose.connect("mongodb://172.17.0.2:27017/playground", 
+  { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('successfully connected to mongodb'))
+.catch((err) => { throw new Error("Oops an error", err) })
+```
+Not to afraid, it's just a few lines of code on connecting your mongoose to mongoDB driver. How? Let me explain
+
+1. First, you import `mongoose` 
+2. `mongoose.connect()` is a function which takes few parameters, which are, 
+ 
+a) The `url` - "mongmongodb://172.17.0.2:27017/playground", which is nothing but "mongodb://localhost_address/db_name". That `mongodb://` is a starting point and you should not miss. Remeber that! 
+ 
+b) Object `{ useNewUrlParser: true, useUnifiedTopology: true }` - These are parameters you need to pass to take down the `deprecation warnings` thrown by the compiler. You might get those warnings or might not, depending upon the `mongoose` & `MongoDB` version you are using.
+
+While executing `mongoose.connect()` it will either throw an error or a successful connection message. To know what really happened in the hood, we use `.then()` & `.catch()` to display respective message.
+
+#### Note - The url `mongodb://localhost_address/db_name`  where you have to specify db_name, not necessarily need to exist before. If that db_name is already there, then MongoDB will use that db else it will create a new db of that name. Making our lives simpler.
+
+Considering that you have successfully connected to MongoDB driver with the help of mongoose. Let's learn how to create a schema for our database.
 
