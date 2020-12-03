@@ -57,3 +57,38 @@ While executing `mongoose.connect()` it will either throw an error or a successf
 
 Considering that you have successfully connected to MongoDB driver with the help of mongoose. Let's learn how to create a schema for our database.
 
+Before diving into schema creation, I will like to mention a few of the necessary terminology for MongoDB
+
+1. Database - Same idea as of any SQL database. What differs is, SQL has tables & rows in their database, whereas MongoDB has collections.
+2. Collection - It is equivalent to a table in an SQL database.
+3. Document - SQL table has rows & columns. You guessed that right, MongoDB too has it's equivalent, named document. A document can be referred to as a SQL database row.
+4. Field - A field in a document, is like a column in a row of data in SQL. 
+
+So this is how the tree structure of MongoDB is - You have a Database, that database contains different collections where the collection is made up of a document & field.
+
+#### Where is Schema then?
+
+A document schema is a JSON object that allows you to define the shape and content of documents and embedded documents in a collection. - MongoDB Guide
+
+Meaning that, you are defining data structure or shape of a document i.e., what that document contains, a number, a string, or something else!
+
+```javascript
+
+const playSchema = new mongoose.Schema({
+    nickname: String,
+    hobby: String,
+    job: String,
+    date: { type: Date, default: Date.now },
+    age: Number,
+    bookie: Boolean,
+    play: String,
+    tags: [String]
+})
+
+```
+
+Back to the code, here I am defining a schema named `playSchema` with the help of mongoose.Schema(). The object that has been passed to mongoose function is our schema structure. It defines a property in our documents which will be cast to its associated SchemaType.. Ex., nickname casts a String SchemaType, date to data SchemaType ( it's not object, date is one of schemaType ) or be that tags which casts an Array SchemType. These are some examples of built-in Mongoose Schema Types.
+
+`Note` - Everything in Mongoose starts with a Schema. Each schema maps to a MongoDB collection and defines the shape of the documents within that collection.
+
+
