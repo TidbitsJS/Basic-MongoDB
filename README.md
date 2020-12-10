@@ -32,6 +32,8 @@ We need this to connect Mongoose to our MongoDB service so that we can use datab
 
 `Mongoose` is an Object Data Modeling (ODM) library for MongoDB and Node.js. It manages relationships between data, provides schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB. More clearly, it's a JavaScript framework that is commonly used in a Node.js application with a MongoDB database.
 
+#
+
 Assuming that you have all your required setup running on your machine, let's work on code.
 
 ```javascript
@@ -66,7 +68,9 @@ Before diving into schema creation, I will like to mention a few of the necessar
 
 So this is how the tree structure of MongoDB is - You have a Database, that database contains different collections where the collection is made up of a document & field.
 
-#### Where is Schema then?
+#
+
+#### What is Schema then?
 
 A document schema is a JSON object that allows you to define the shape and content of documents and embedded documents in a collection. - MongoDB Guide
 
@@ -91,4 +95,29 @@ Back to the code, here I am defining a schema named `playSchema` with the help o
 
 `Note` - Everything in Mongoose starts with a Schema. Each schema maps to a MongoDB collection and defines the shape of the documents within that collection.
 
+Moving on to the next part, you see a code statement. What's that? 
 
+```javascript
+
+const Play = mongoose.model('Play', playSchema)
+
+```
+A variable named `Play` is assigned to a function of mongoose where I am passing two params, namely, `Play` (again) and `playSchema`. 
+
+playSchema is notable here, one can find out that we are passing our defined Schema to this `mongoose.model()`. Perfect. Let's learn what it actually does.
+
+#
+
+#### mongoose.model()
+
+`mongoose.model() is a wrapper on the mongoose schema. What did that mean? - A Mongoose schema defines the structure of the document, default values, validators, etc., whereas a Mongoose model provides an interface to the database for creating, querying, updating, deleting records, etc.
+
+Something similar to `Class`, you define the structure and then take an instance of that to manipulate data through the `new` keyword. The instance of Class. The interface of Schema. Got it? 
+
+Let's crack the first and foremost parameter `Play`. It's the singular name of your collection that you are going to create in your database. Singular?  
+
+Mongoose automatically looks for the plural, lowercased version of your model name. Thus, for the example above, the model `play` is for the `plays` collection in the database - mongoose Docs
+
+> Note: The .model() function makes a copy of schema
+
+We are yet to create a document in our collection called `Play` ( In the database it is `plays` ) in a database named `playground`. Losing interest?. Don't. Hang in there, the very next step is about creating the very first document in the database. Are you ready? 
