@@ -121,3 +121,52 @@ Mongoose automatically looks for the plural, lowercased version of your model na
 > Note: The .model() function makes a copy of schema
 
 We are yet to create a document in our collection called `Play` ( In the database it is `plays` ) in a database named `playground`. Losing interest?. Don't. Hang in there, the very next step is about creating the very first document in the database. Are you ready? 
+
+#
+
+The next piece of code is something like this -
+
+```javascript
+async function playground() {
+    const play = new Play ({
+        nickname: 'Riley',
+        hobby: 'Playing',
+        job: 'Studying',
+        age: 11,
+        bookie: false,
+        play: 'Inside Out',
+        tags: ['Joy', 'Sadness', 'Anger', 'Fear', 'Disgust']
+    })
+    
+    const result = await play.save()
+    console.log('====================================');
+    console.log(result)
+    console.log('====================================');
+}
+```
+
+An async function with few code statements executing in it. So far we have created our model and now we are trying to take the instance of this model. An instance of a model is called a document. Creating them and saving them to the database is easy. You get that right, use the `new` keyword to take the instance. That's what the first code block is trying to explain to you so far. 
+
+```javascript
+const play = new Play ({
+        nickname: 'Riley',
+        hobby: 'Playing',
+        job: 'Studying',
+        age: 11,
+        bookie: false,
+        play: 'Inside Out',
+        tags: ['Joy', 'Sadness', 'Anger', 'Fear', 'Disgust']
+ })
+```
+
+Variable `play` is a document here that contains all those fields we have defined and compiled so far. Defining the Schema & creating a fancy constructor called `model`. So the first document has info about Riley whose hobby is playing, age is 11 with some other tags. Note that we haven't defined the `Date` field here. No value was provided. Go back, & take a look at the Schema definition. Yes, it says that, if you provide your document with any specific date, it will assign a date variable with it and if not, then it will, itself, write the current time to the field. So far So good, a document has been created. Let's save this using mongoose's built-in function. We have that luxury!
+
+```javascript
+const result = await play.save()
+```
+
+Kindly note it down, we have declared `playground()` as an asynchronous function. Meaning that there is something in function, which deals with promises, which returns a promise after its execution, be that reject or resolve, whatever it may be. To make this async code simpler, we have used `async/await`, which is the sugar coat of `Promises`. 
+
+With the schema and model set up, the mongoose save() method can now be used to insert a document into the “play” collection. The `play.save()` will either send an error or insert the document into our collection. You just need to simply console.log.
+
+Not to forget, you better call the `playground()` function to see the end result. And after that, you can check the inserted document & its collection in your mongo shell by executing a few commands.
