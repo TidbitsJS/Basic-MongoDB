@@ -170,3 +170,35 @@ Kindly note it down, we have declared `playground()` as an asynchronous function
 With the schema and model set up, the mongoose save() method can now be used to insert a document into the “play” collection. The `play.save()` will either send an error or insert the document into our collection. You just need to simply console.log.
 
 Not to forget, you better call the `playground()` function to see the end result. And after that, you can check the inserted document & its collection in your mongo shell by executing a few commands.
+
+# 
+
+While you might have successfully inserted a document in the database, this is not what we wanted. Why do I say so? See, you did everything right up to this point, no doubt. But what remains is accessing those documents from the database of a specific collection. Cause that's what we need, save data & display it later to a user.
+
+After running the `playground()` function, you might see an object ended up in your console. The `result` variable. It outputs how our document has been inserted into the database by MongoDB. Yes, the `id field`. It is a unique number given to every document by MongoDB. Well, you can give an id of your choice anytime. But you will have to make sure it's novel and is given to every document out there. The choice is always yours.
+
+Back to the point, `result` is displaying what we have entered just now. We don't know the past data record at all. No idea. This is where,` Queries` come to help us to backtrack the data back into our application. Yeah, that's what we want. Without further due, let's jump right on Query Track.
+
+#### Query of Query
+
+There are various ways to query a document from the MongoDB database. It can be a normal Query, Logical Query, Comparison Query, or Regular Expression Query. Anything.
+
+Here is a simple hands-on fo simple normal Query - 
+
+```javascript
+async function getPlays() {
+
+    const plays = await Play
+            .find({ bookie: false }) 
+
+    console.log('====================================');
+    console.log(plays);
+    console.log('====================================');
+}
+```
+Try not to get thrown by the naming conventions that I have used. Rather try to read the code properly for a minute. As we are dealing with asynchronous code, you can clearly see async/await.
+```javascript
+const plays = await play.find({ bookie: false })
+```
+
+The code statement is to get those documents that have the `bookie: false` field in them. The `Play.find({ key: value })` is a simple query where you can retrieve any amount of document by passing a certain parameter. It's not mandatory to though. If you just thought of calling `Play.find()`, no problem, you are not going to deal with unknown errors. It's a valid code. Calling that statement will lead to the complete display of all the documents that are present in the database. You will get an array of objects as an output on your console.
