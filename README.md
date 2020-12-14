@@ -202,3 +202,35 @@ const plays = await play.find({ bookie: false })
 ```
 
 The code statement is to get those documents that have the `bookie: false` field in them. The `Play.find({ key: value })` is a simple query where you can retrieve any amount of document by passing a certain parameter. It's not mandatory to though. If you just thought of calling `Play.find()`, no problem, you are not going to deal with unknown errors. It's a valid code. Calling that statement will lead to the complete display of all the documents that are present in the database. You will get an array of objects as an output on your console.
+
+#
+
+Moving ahead in the course, Author Mosh teaches us some different types of queries including comparison query ( less than, greater than, equal to and so forth remaining ), logical query ( OR & And ), and a few queries based on the regular expressions. Let's know them in detail.
+
+```javascript
+const plays = await Play 
+    .find({ age: { $gte: 10, $lte: 20 } })
+```
+
+Decoding the above code will lead us to a result of documents that have their age field either greater than equal to 10 ( `$gte: 10` )  or less than equal to 20 ( `$lte: 10` ). Simple as it is. Let's do one more such query.
+
+
+```javascript
+const plays = await Play 
+    .find({ age: { $in: [5, 10, 15] } }) 
+```
+
+When used above code as a query on your documents, it will output those specific documents whose age field is similar to specified elements in the array `$in: [5, 10, 15]`. Telling us that, the resulted documents will have ages as 5, 10, or 15.  
+
+Below is the list of Comparison Query Operators - 
+
+1) `$eq` - Matches values that are equal to a specified value.
+2) `$gt` - Matches values that are greater than a specified value.
+3) `$gte` - Matches values that are greater than or equal to a specified value.
+4) `$in` - Matches any of the values specified in an array.
+5) `$lt` - Matches values that are less than a specified value.
+6) `$lte` - Matches values that are less than or equal to a specified value.
+7) `$ne` - Matches all values that are not equal to a specified value.
+8) `$nin` - Matches none of the values specified in an array.
+
+Go grab a cookie or have a cup of coffee and start playing with data using those operators. I bet, it will be great fun.
