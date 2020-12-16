@@ -234,3 +234,59 @@ Below is the list of Comparison Query Operators -
 8) `$nin` - Matches none of the values specified in an array.
 
 Go grab a cookie or have a cup of coffee and start playing with data using those operators. I bet, it will be great fun.
+
+# 
+
+Time to move on ( to next Query ). The second most coming to the list is, Logical Query. Here is the sample code on how to use a logical query on your documents.
+
+```javascript
+const plays = await Play
+      .find()
+      .or([{ age: { $gte: 5, $lte: 20  } }, { bookie: false }])
+```
+
+Clearly, it's stating that, return every document (`.find()` - No filters here ) where the document field has `Age` either `Greater than equal to 5 or Less than equal to 20` OR `bookie is false`. Note that capitalized "OR". This is what our logical query operator is. You can use "AND" as well. Like this -
+
+
+```javascript
+const plays = await Play
+      .find()
+      .and([{ age: { $gte: 5, $lte: 20  } }, { bookie: false }])
+```
+
+We can play a little more here. Adding a few more methods on our modal to get more filtered documents. For example, limiting the number of documents, or sorting that in a particular order. Interesting right?
+
+```javascript
+const plays = await Play
+      .find()
+      .or([{ age: { $gte: 5, $lte: 20  } }, { bookie: false }])
+      .limit(10)
+      .sort({nickname: 1})
+```
+
+Continuing the above "OR" equation with new modifications, the output will be an array of documents limited to 10 and sorted by nickname in ascending order.
+
+`.limit(x)` - Limits the number of documents passed to the next stage. x can be any positive number
+`.sort(1)` - Sort ascending.
+`.sort(-1)` - Sort descending.
+
+
+Well, this is not the end of Logical Query. You can use logical operations in another way too. I have had found this recently on MongoDB docs. Why not mention them here too?
+
+List of Logical Query Operators -
+
+`$and` - Joins query clauses with a logical AND returns all documents that match the conditions of both clauses.
+`$not` - Inverts the effect of a query expression and returns documents that do not match the query expression.
+`$nor` - Joins query clauses with a logical NOR returns all documents that fail to match both clauses.
+`$or` - Joins query clauses with a logical OR returns all documents that match the conditions of either clause.
+
+Besides listing these out, let's try the above `.or()` problem into the new `$or`.
+
+```javascript
+const plays = await Play
+     .find({ $or: [ { age: { $gte: 5, $lte: 20 } }, { bookie: false } ] })
+```
+The result is going to be the same. These are just different ways of doing the same thing. You can choose any.
+
+#
+
