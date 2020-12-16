@@ -275,10 +275,10 @@ Well, this is not the end of Logical Query. You can use logical operations in an
 
 List of Logical Query Operators -
 
-`$and` - Joins query clauses with a logical AND returns all documents that match the conditions of both clauses.
-`$not` - Inverts the effect of a query expression and returns documents that do not match the query expression.
-`$nor` - Joins query clauses with a logical NOR returns all documents that fail to match both clauses.
-`$or` - Joins query clauses with a logical OR returns all documents that match the conditions of either clause.
+1) `$and` - Joins query clauses with a logical AND returns all documents that match the conditions of both clauses.
+2) `$not` - Inverts the effect of a query expression and returns documents that do not match the query expression.
+3) `$nor` - Joins query clauses with a logical NOR returns all documents that fail to match both clauses.
+4) `$or` - Joins query clauses with a logical OR returns all documents that match the conditions of either clause.
 
 Besides listing these out, let's try the above `.or()` problem into the new `$or`.
 
